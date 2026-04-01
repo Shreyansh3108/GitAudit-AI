@@ -41,7 +41,7 @@ export async function generateAudit(url: string) {
 
     //  THE FIX: Find the real MongoDB user using the Clerk ID
     const dbUser = await prisma.user.findUnique({
-      where: { clerkId: userId },
+      where: { clerkUserId: userId },
     });
 
     if (!dbUser) {
