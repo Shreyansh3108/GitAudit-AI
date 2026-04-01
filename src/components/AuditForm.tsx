@@ -57,11 +57,11 @@ export default function AuditForm() {
     try {
       const result = await generateAudit(url);
 
-      if (result && result.success) {
-        setReport(result.report.markdownContent);
-      } else {
-        setError(result?.message || "The server rejected the request without a specific error message.");
-      }
+    if (result && result.success && result.report) { 
+    setReport(result.report.markdownContent);
+    } else {
+    setError(result?.message || "The server rejected the request without a specific error.");
+    }
     } catch (err: any) {
       setError(err.message || "The application crashed before the server could finish.");
     } finally {
