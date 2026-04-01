@@ -39,6 +39,15 @@ export async function generateAudit(url: string) {
     const { userId } = await auth();
     if (!userId) throw new Error("Unauthorized");
 
+    //  THE FIX: Find the real MongoDB user using the Clerk ID
+    const dbUser = await prisma.user.findUnique({
+      where: { clerkId: userId },
+    });
+
+    if (!dbUser) {
+      throw new Error("User not found in database. Please try signing in again.");
+    }
+
     const { owner, repo } = parseGitHubUrl(url);
     const repoContext = await getRepoContext(url);
     
@@ -48,7 +57,7 @@ export async function generateAudit(url: string) {
       // Attempt the real AI call
       reportContent = await generateRepoAudit(repoContext);
     } catch (aiError) {
-      //  THIS WILL REVEAL THE INVISIBLE BUG:
+      // THIS WILL REVEAL THE INVISIBLE BUG:
       console.log("====================================");
       console.error(" ACTUAL AI ERROR REVEALED:", aiError);
       console.log("====================================");
@@ -58,10 +67,10 @@ export async function generateAudit(url: string) {
       reportContent = FALLBACK_REPORT; 
     }
 
-    // Save to database (Cleaned up to perfectly match your Prisma schema)
+    // Save to database using the correct MongoDB ID
     const savedReport = await prisma.report.create({
       data: {
-        userId: userId,
+        userId: dbUser.id, // USING MONGODB ID INSTEAD OF CLERK ID
         githubUrl: url, 
         markdownContent: reportContent, 
       },
