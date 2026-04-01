@@ -91,7 +91,7 @@ export default function RootLayout({
                   </Show>
                   
                   <Show when="signed-in">
-                    <UserButton fallbackRedirectUrl="/" />
+                    <UserButton />
                   </Show>
                 </div>
               </nav>
