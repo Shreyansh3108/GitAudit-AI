@@ -11,6 +11,11 @@ Focus strictly on:
 2. Potential Big O Performance Bottlenecks
 3. Security Vulnerabilities & Best Practices
 
+CRITICAL INSTRUCTION: You MUST categorize every single issue or recommendation using these exact bold labels (do not use emojis or other text):
+**[CRITICAL]** - For severe security or architecture flaws.
+**[WARNING]** - For performance bottlenecks or tech debt.
+**[INFO]** - For general best practices.
+
 Do not be overly polite. Be direct, highly technical, and concise.
 Provide specific code snippets if suggesting improvements.
 `;
@@ -20,8 +25,12 @@ export async function generateRepoAudit(repoContext: string) {
     throw new Error("Repository context is empty.");
   }
 
+  //  DIAGNOSTIC CHECK: How much text are we actually sending?
+  console.log(` AI Payload Size: ${repoContext.length} characters`);
+
   const { text } = await generateText({
-    model: google("gemini-1.5-pro"),
+    // ✅ FIX: Upgraded to the new, active 2.5 generation!
+    model: google("gemini-2.5-flash"), 
     system: AUDIT_SYSTEM_PROMPT,
     prompt: `Perform an audit on the following repository data:\n\n${repoContext}`,
     temperature: 0.2,
