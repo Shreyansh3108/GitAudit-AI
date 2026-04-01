@@ -19,20 +19,20 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // 🌟 MOCK STATE: We will connect this to Stripe/Prisma later! 
-  // Change this to "free", "silver", or "gold" to test the UI.
-  const userTier: "free" | "silver" | "gold" = "gold"; 
+  // ✅ FIXED: Changed to a generic string type so TypeScript stops crashing the Vercel build!
+  // It is currently set to "free". Once the site is live, we will hook this up to Prisma/Stripe.
+  const userTier: string = "free"; 
 
   return (
     <ClerkProvider>
       <html lang="en" className={cn("font-sans", geist.variable)}>
-        {/* ✅ FIXED: Full-screen, soft gradient background to the entire body */}
+        {/* Full-screen, soft gradient background to the entire body */}
         <body className={cn(
           inter.className, 
           "min-h-screen flex flex-col bg-gradient-to-br from-orange-50 via-white to-slate-50"
         )}>
           
-          {/* ✅ FIXED: Transparent frosted glass header */}
+          {/* Transparent frosted glass header */}
           <header className="sticky top-0 z-50 w-full border-b border-orange-100/50 bg-white/20 backdrop-blur-xl shadow-sm">
             <div className="container mx-auto flex h-16 max-w-6xl items-center justify-between px-4 md:px-8">
               
@@ -99,7 +99,7 @@ export default function RootLayout({
             </div>
           </header>
 
-          {/* ✅ FIXED: Ensure main container stretches full width */}
+          {/* Ensure main container stretches full width */}
           <main className="flex-1 flex flex-col w-full items-center">
             {children}
           </main>
