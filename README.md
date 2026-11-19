@@ -4,7 +4,7 @@
 
 **An automated SaaS platform for orchestrating comprehensive GitHub repository architecture and security audits in `<20s`, synchronized via real-time payment webhooks.**
 
-[![Live Production Demo](https://img.shields.io/badge/Production-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://github.com/Shreyansh3108)
+[![Live Production Demo](https://img.shields.io/badge/Production-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://git-audit-ai.vercel.app/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](#-technical-architecture)
 [![Next.js 16](https://img.shields.io/badge/Next.js_16-App_Router-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](#-technical-architecture)
 [![Prisma ORM](https://img.shields.io/badge/Prisma_ORM-MongoDB-47A248?style=for-the-badge&logo=prisma&logoColor=white)](#-technical-architecture)
